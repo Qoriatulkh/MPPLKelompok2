@@ -1,9 +1,9 @@
-## MPPL Kelompok 4
+# MPPL Kelompok 4
 
-# Ide
+## Ide
 
-# How to install
-    Pre-requisites :
+## How to install
+### Pre-requisites :
     - PHP >= 7.2
     - BCMath PHP Extension
     - Ctype PHP Extension
