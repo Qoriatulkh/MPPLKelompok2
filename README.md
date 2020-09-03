@@ -3,7 +3,7 @@
 # Ide
 
 # How to install
-Pre-requisites :
+    Pre-requisites :
     - PHP >= 7.2
     - BCMath PHP Extension
     - Ctype PHP Extension
