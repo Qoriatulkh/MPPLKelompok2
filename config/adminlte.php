@@ -14,9 +14,9 @@ return [
     |
     */
 
-    'title' => 'Epistema Institute',
+    'title' => '',
     'title_prefix' => '',
-    'title_postfix' => '',
+    'title_postfix' => ' | Epistema Institute Paralegal Management System',
 
     /*
     |--------------------------------------------------------------------------
@@ -123,7 +123,7 @@ return [
     'classes_body' => '',
     'classes_brand' => '',
     'classes_brand_text' => '',
-    'classes_content_wrapper' => 'px-5',
+    'classes_content_wrapper' => 'px-md-5 px-lg-5',
     'classes_content_header' => '',
     'classes_content' => '',
     'classes_sidebar' => 'sidebar-dark-primary elevation-4',

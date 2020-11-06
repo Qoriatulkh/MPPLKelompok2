@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('home');
 });
 
 Auth::routes([
@@ -33,19 +33,20 @@ Route::prefix('/paralegals')->group(function () {
     Route::delete('/{paralegal}', 'ParalegalController@destroy')->name('paralegal.destroy');
 });
 
+// Cases
 Route::prefix('/cases')->group(function () {
-    Route::get('/', 'ParalegalController@index')->name('case.index');
-    Route::post('/', 'ParalegalController@store')->name('case.store');
-    Route::get('/{case}', 'ParalegalController@show')->name('case.show');
-    Route::post('/{case}', 'ParalegalController@update')->name('case.update');
-    Route::delete('/{case}', 'ParalegalController@destroy')->name('case.destroy');
+    Route::get('/', 'ParalegalCaseController@index')->name('case.index');
+    Route::post('/', 'ParalegalCaseController@store')->name('case.store');
+    Route::get('/{case}', 'ParalegalCaseController@show')->name('case.show');
+    Route::post('/{case}', 'ParalegalCaseController@update')->name('case.update');
+    Route::delete('/{case}', 'ParalegalCaseController@destroy')->name('case.destroy');
 });
 
 
 Route::prefix('/areas')->group(function () {
-    Route::get('/', 'ParalegalController@index')->name('area.index');
-    Route::post('/', 'ParalegalController@store')->name('area.store');
-    Route::get('/{area}', 'ParalegalController@show')->name('area.show');
-    Route::post('/{area}', 'ParalegalController@update')->name('area.update');
-    Route::delete('/{area}', 'ParalegalController@destroy')->name('area.destroy');
+    Route::get('/', 'AreaController@index')->name('area.index');
+    Route::post('/', 'AreaController@store')->name('area.store');
+    Route::get('/{area}', 'AreaController@show')->name('area.show');
+    Route::post('/{area}', 'AreaController@update')->name('area.update');
+    Route::delete('/{area}', 'AreaController@destroy')->name('area.destroy');
 });
