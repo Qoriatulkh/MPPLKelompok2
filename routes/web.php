@@ -25,7 +25,7 @@ Auth::routes([
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::prefix('/paralegals')->group(function () {
+Route::prefix('/paralegal')->group(function () {
     Route::get('/', 'ParalegalController@index')->name('paralegal.index');
     Route::get('/create', 'ParalegalController@create')->name('paralegal.create');
     Route::post('/', 'ParalegalController@store')->name('paralegal.store');
@@ -36,16 +36,40 @@ Route::prefix('/paralegals')->group(function () {
 });
 
 // Cases
-Route::prefix('/cases')->group(function () {
+Route::prefix('/kasus')->group(function () {
     Route::get('/', 'ParalegalCaseController@index')->name('case.index');
-    Route::post('/', 'ParalegalCaseController@store')->name('case.store');
-    Route::get('/{case}', 'ParalegalCaseController@show')->name('case.show');
-    Route::post('/{case}', 'ParalegalCaseController@update')->name('case.update');
-    Route::delete('/{case}', 'ParalegalCaseController@destroy')->name('case.destroy');
+    Route::get('/create', 'ParalegalCaseController@create')->name('case.create');
+    Route::post('/store', 'ParalegalCaseController@store')->name('case.store');
+    Route::get('/{case}/show', 'ParalegalCaseController@show')->name('case.show');
+    Route::get('/{case}/edit', 'ParalegalCaseController@edit')->name('case.edit');
+    Route::post('/{case}/update', 'ParalegalCaseController@update')->name('case.update');
+    Route::delete('/{case}/delete', 'ParalegalCaseController@destroy')->name('case.destroy');
+
+    // Types
+    Route::prefix('jenis')->group(function () {
+        Route::get('/', 'ParalegalCaseTypeController@index')->name('case.type.index');
+        Route::get('/create', 'ParalegalCaseTypeController@create')->name('case.type.create');
+        Route::post('/store', 'ParalegalCaseTypeController@store')->name('case.type.store');
+        Route::get('/{paralegalCaseType}/show', 'ParalegalCaseTypeController@show')->name('case.type.show');
+        Route::get('/{paralegalCaseType}/edit', 'ParalegalCaseTypeController@edit')->name('case.type.edit');
+        Route::post('/{paralegalCaseType}/update', 'ParalegalCaseTypeController@update')->name('case.type.update');
+        Route::delete('/{paralegalCaseType}/delete', 'ParalegalCaseTypeController@destroy')->name('case.type.destroy');
+    });
+
+    // Fields
+    Route::prefix('bidang')->group(function () {
+        Route::get('/', 'ParalegalCaseFieldController@index')->name('case.field.index');
+        Route::get('/create', 'ParalegalCaseFieldController@create')->name('case.field.create');
+        Route::post('/store', 'ParalegalCaseFieldController@store')->name('case.field.store');
+        Route::get('/{paralegalCaseField}/show', 'ParalegalCaseFieldController@show')->name('case.field.show');
+        Route::get('/{paralegalCaseField}/edit', 'ParalegalCaseFieldController@edit')->name('case.field.edit');
+        Route::post('/{paralegalCaseField}/update', 'ParalegalCaseFieldController@update')->name('case.field.update');
+        Route::delete('/{paralegalCaseField}/delete', 'ParalegalCaseFieldController@destroy')->name('case.field.destroy');
+    });
 });
 
 
-Route::prefix('/areas')->group(function () {
+Route::prefix('/area')->group(function () {
     Route::get('/', 'AreaController@index')->name('area.index');
     Route::post('/', 'AreaController@store')->name('area.store');
     Route::get('/{area}', 'AreaController@show')->name('area.show');

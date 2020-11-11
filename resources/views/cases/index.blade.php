@@ -24,14 +24,8 @@
                                 <input type="text" class="form-control" id="number">
                             </div>
                             <div class="form-group">
-                                <label for="region">Region</label>
+                                <label for="region">Area</label>
                                 <select class="form-control select2" name="region" id="region">
-                                    <option value="">Semua</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="district">Kecamatan</label>
-                                <select class="form-control select2" name="district" id="district">
                                     <option value="">Semua</option>
                                 </select>
                             </div>
@@ -42,15 +36,12 @@
                                 <input type="text" class="form-control" id="name">
                             </div>
                             <div class="form-group">
-                                <label for="province">Provinsi</label>
-                                <select class="form-control select2" name="province" id="province">
+                                <label for="type">Jenis</label>
+                                <select class="form-control select2" name="type" id="type">
                                     <option value="">Semua</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="village">Kelurahan</label>
-                                <select class="form-control select2" name="village" id="village">
-                                    <option value="">Semua</option>
+                                    @foreach ($types as $type)
+                                    <option value="{{$type->id}}">{{$type->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -60,9 +51,12 @@
                                 <input type="text" class="form-control" id="name">
                             </div>
                             <div class="form-group">
-                                <label for="city">Kota / Kabupaten</label>
-                                <select class="form-control select2" name="city" id="city">
+                                <label for="field">Bidang</label>
+                                <select class="form-control select2" name="field" id="field">
                                     <option value="">Semua</option>
+                                    @foreach ($fields as $field)
+                                    <option value="{{$field->id}}">{{$field->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -80,7 +74,7 @@
         </div>
         <div class="card">
             <div class="card-body">
-                {{ $dataTable->table() }}
+                {!! $dataTable->table(['class' => 'table table-hover'], true) !!}
             </div>
         </div>
     </div>

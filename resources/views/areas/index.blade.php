@@ -11,7 +11,7 @@
 <div class="row">
     <div class="col-12">
         <button class="btn btn-primary btn-block mb-4" data-toggle="collapse" href="#collapseExample" type="button"
-            aria-expanded="false" aria-controls="collapseExample">
+            aria-expanded="false" aria-controls="collapseExample" id="filterButton">
             <i class="fas fa-search"></i> Filter
         </button>
         <div class="collapse" id="collapseExample">
@@ -68,7 +68,7 @@
         </div>
         <div class="card">
             <div class="card-body">
-                {{ $dataTable->table() }}
+                {!! $dataTable->table(['class' => 'table table-hover'], true) !!}
             </div>
         </div>
     </div>
@@ -77,4 +77,9 @@
 
 @push('js')
 {{$dataTable->scripts()}}
+<script>
+    $(" #filterButton ").click(function(){
+        console.log(this)
+    })
+</script>
 @endpush

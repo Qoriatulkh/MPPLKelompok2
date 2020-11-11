@@ -83,8 +83,11 @@
             </div>
         </div>
         <div class="card">
+            <div class="card-header my-2">
+                <h5>Daftar Paralegal</h5>
+            </div>
             <div class="card-body">
-                {{$dataTable->table()}}
+                {!! $dataTable->table(['class' => 'table table-hover'], true) !!}
             </div>
         </div>
     </div>

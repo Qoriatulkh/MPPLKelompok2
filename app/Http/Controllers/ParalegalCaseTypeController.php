@@ -2,24 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\ParalegalCaseDataTable;
-use App\ParalegalCase;
-use App\ParalegalCaseField;
+use App\DataTables\ParalegalCaseTypeDataTable;
 use App\ParalegalCaseType;
 use Illuminate\Http\Request;
 
-class ParalegalCaseController extends Controller
+class ParalegalCaseTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ParalegalCaseDataTable $paralegalCaseDataTable)
+    public function index(ParalegalCaseTypeDataTable $paralegalCaseTypeDataTable)
     {
-        $types = ParalegalCaseType::all();
-        $fields = ParalegalCaseField::all();
-        return $paralegalCaseDataTable->render('cases.index', compact('types', 'fields'));
+        return $paralegalCaseTypeDataTable->render('cases.types.index');
     }
 
     /**
@@ -46,10 +42,10 @@ class ParalegalCaseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ParalegalCase  $paralegalCase
+     * @param  \App\ParalegalCaseType  $paralegalCaseType
      * @return \Illuminate\Http\Response
      */
-    public function show(ParalegalCase $paralegalCase)
+    public function show(ParalegalCaseType $paralegalCaseType)
     {
         //
     }
@@ -57,10 +53,10 @@ class ParalegalCaseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ParalegalCase  $paralegalCase
+     * @param  \App\ParalegalCaseType  $paralegalCaseType
      * @return \Illuminate\Http\Response
      */
-    public function edit(ParalegalCase $paralegalCase)
+    public function edit(ParalegalCaseType $paralegalCaseType)
     {
         //
     }
@@ -69,10 +65,10 @@ class ParalegalCaseController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ParalegalCase  $paralegalCase
+     * @param  \App\ParalegalCaseType  $paralegalCaseType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ParalegalCase $paralegalCase)
+    public function update(Request $request, ParalegalCaseType $paralegalCaseType)
     {
         //
     }
@@ -80,10 +76,10 @@ class ParalegalCaseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ParalegalCase  $paralegalCase
+     * @param  \App\ParalegalCaseType  $paralegalCaseType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ParalegalCase $paralegalCase)
+    public function destroy(ParalegalCaseType $paralegalCaseType)
     {
         //
     }
