@@ -85,6 +85,16 @@
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+    <script>
+        $(document).ready(function(){
+            $('.select2').select2(
+                {
+                    width: '100%'
+                }
+            );
+        });
+    </script>
 
     {{-- Configured Scripts --}}
     @include('adminlte::plugins', ['type' => 'js'])

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\ParalegalDataTable;
 use App\Paralegal;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,9 @@ class ParalegalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ParalegalDataTable $paralegalDataTable)
     {
-        return view('paralegals.index');
+        return $paralegalDataTable->render('paralegals.index');
     }
 
     /**
