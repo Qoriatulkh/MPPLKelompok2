@@ -250,7 +250,7 @@ return [
         [
             'text' => 'Manajemen Paralegal',
             'icon' => 'fas fa-fw fa-users',
-            'active' => ['paralegals*'],
+            'active' => ['paralegal*'],
             'classes' => 'mt-3',
             'submenu' => [
                 [
@@ -265,8 +265,22 @@ return [
         ],
         [
             'text' => 'Manajemen Kasus',
-            'route'  => 'case.index',
             'icon' => 'fas fa-fw fa-archive',
+            'active' => ['kasus*'],
+            'submenu' => [
+                [
+                    'text' => 'Semua Kasus',
+                    'route' => 'case.index',
+                ],
+                [
+                    'text' => 'Bidang Kasus',
+                    'route' => 'case.field.index',
+                ],
+                [
+                    'text' => 'Jenis Kasus',
+                    'route' => 'case.type.index',
+                ],
+            ]
         ],
         [
             'text' => 'Manajemen Area',
@@ -416,6 +430,21 @@ return [
                     'type' => 'js',
                     'asset' => true,
                     'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
+                ],
+            ],
+        ],
+        'DatatablesResponsive' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => '//cdn.datatables.net/responsive/2.2.6/css/responsive.dataTables.min.css',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js',
                 ],
             ],
         ],
