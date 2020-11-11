@@ -256,6 +256,10 @@ return [
                 [
                     'text' => 'Semua Paralegal',
                     'route' => 'paralegal.index',
+                ],
+                [
+                    'text' => 'Tambah Paralegal',
+                    'route' => 'paralegal.create',
                 ]
             ]
         ],

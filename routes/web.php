@@ -27,8 +27,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('/paralegals')->group(function () {
     Route::get('/', 'ParalegalController@index')->name('paralegal.index');
+    Route::get('/create', 'ParalegalController@create')->name('paralegal.create');
     Route::post('/', 'ParalegalController@store')->name('paralegal.store');
     Route::get('/{paralegal}', 'ParalegalController@show')->name('paralegal.show');
+    Route::get('/{paralegal}/edit', 'ParalegalController@edit')->name('paralegal.edit');
     Route::post('/{paralegal}', 'ParalegalController@update')->name('paralegal.update');
     Route::delete('/{paralegal}', 'ParalegalController@destroy')->name('paralegal.destroy');
 });

@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Paralegal')
+@section('title', 'Area')
 
 @section('content_header')
-<h1 class="m-0 text-dark">Manajemen Paralegal</h1>
+<h1 class="m-0 text-dark">Manajemen Area</h1>
 <hr>
 @stop
 
@@ -31,10 +31,6 @@
                                     <option value="">Semua</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="number">Nomor Paralegal</label>
-                                <input type="text" class="form-control" id="number">
-                            </div>
                         </div>
                         <div class="col-md-4 col-lg-4">
                             <div class="form-group">
@@ -49,24 +45,12 @@
                                     <option value="">Semua</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="name">Nama</label>
-                                <input type="text" class="form-control" id="name">
-                            </div>
                         </div>
                         <div class="col-md-4 col-lg-4">
                             <div class="form-group">
                                 <label for="city">Kota / Kabupaten</label>
                                 <select class="form-control select2" name="city" id="city">
                                     <option value="">Semua</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="city">Jenis Kelamin</label>
-                                <select class="form-control select2" name="city" id="city">
-                                    <option value="">Semua</option>
-                                    <option value="L">Laki - Laki</option>
-                                    <option value="P">Perempuan</option>
                                 </select>
                             </div>
                         </div>
@@ -84,12 +68,12 @@
         </div>
         <div class="card">
             <div class="card-body">
-                {{$dataTable->table()}}
+                {{ $dataTable->table() }}
             </div>
         </div>
     </div>
 </div>
-@stop
+@endsection
 
 @push('js')
 {{$dataTable->scripts()}}

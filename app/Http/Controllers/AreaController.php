@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Area;
+use App\DataTables\AreaDataTable;
 use Illuminate\Http\Request;
 
 class AreaController extends Controller
@@ -12,9 +13,9 @@ class AreaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(AreaDataTable $areaDataTable)
     {
-        //
+        return $areaDataTable->render('areas.index');
     }
 
     /**
