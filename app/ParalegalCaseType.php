@@ -3,17 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Paralegal;
 
 class ParalegalCaseType extends Model
 {
-    // Fillable mass assign
-    protected $fillable = ['name'];
+    protected $table = 'paralegalCaseTypes';
 
-    /**
-     * Relations
-     */
+    protected $fillable = ['id','name'];
+
     public function cases()
     {
-        return $this->hasMany(ParalegalCase::class, 'paralegal_case_type_id', 'id');
+        $this->hasMany(ParalegalCase::class);
     }
 }
