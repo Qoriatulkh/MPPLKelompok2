@@ -97,6 +97,12 @@ class AreaController extends Controller
      */
     public function update(Request $request, Area $area)
     {
+        $areaWithSameCode = Area::where('code', strtoupper($request->code))->first();
+        if ($areaWithSameCode) {
+            Alert::error("Gagal", "Area dengan kode tersebut sudah ada. Silahkan cek kode region, provinsi, kota/kab, kecamatan, ataupun kelurahan/desa agar tidak duplikat.");
+            return redirect()->back()->withInput()->withErrors(['code' => 'Mohon periksa kode agar tidak duplikat']);
+        }
+
         $data = $request->only('code', 'region_name', 'region_code', 'province_name', 'province_code', 'city_name', 'city_code', 'district_name', 'district_code', 'village_name', 'village_code');
         $area->update($data);
         Alert::success('Berhasil', "Berhasil memperbarui area");
