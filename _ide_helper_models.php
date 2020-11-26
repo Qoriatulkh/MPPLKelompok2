@@ -45,6 +45,39 @@ namespace App{
 
 namespace App{
 /**
+ * App\ParalegalCaseField
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|ParalegalCaseField newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ParalegalCaseField newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ParalegalCaseField query()
+ */
+	class ParalegalCaseField extends \Eloquent {}
+}
+
+namespace App{
+/**
+ * App\ParalegalCaseType
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|ParalegalCaseType newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ParalegalCaseType newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ParalegalCaseType query()
+ */
+	class ParalegalCaseType extends \Eloquent {}
+}
+
+namespace App{
+/**
+ * App\Role
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Role newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Role newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Role query()
+ */
+	class Role extends \Eloquent {}
+}
+
+namespace App{
+/**
  * App\User
  *
  * @property int $id
