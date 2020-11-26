@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Area;
 use App\DataTables\AreaDataTable;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AreaController extends Controller
 {
@@ -15,7 +16,13 @@ class AreaController extends Controller
      */
     public function index(AreaDataTable $areaDataTable)
     {
-        return $areaDataTable->render('areas.index');
+        $areas = Area::all();
+        $regions = $areas->unique('region_name')->pluck('region_name');
+        $provinces = $areas->unique('province_name')->pluck('province_name');
+        $cities = $areas->unique('city_name')->pluck('city_name');
+        $districts = $areas->unique('district_name')->pluck('district_name');
+        $villages = $areas->unique('village_name')->pluck('village_name');
+        return $areaDataTable->render('areas.index', compact('regions', 'provinces', 'cities', 'districts', 'villages'));
     }
 
     /**
@@ -25,7 +32,7 @@ class AreaController extends Controller
      */
     public function create()
     {
-        //
+        return view('areas.create');
     }
 
     /**
@@ -36,7 +43,9 @@ class AreaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Area::create($request->only('code', 'region_name', 'region_code', 'province_name', 'province_code', 'city_name', 'city_code', 'district_name', 'district_code', 'village_name', 'village_code'));
+        Alert::success("Berhasil", "Berhasil menambah area");
+        return redirect()->back();
     }
 
     /**
@@ -47,7 +56,7 @@ class AreaController extends Controller
      */
     public function show(Area $area)
     {
-        //
+        return view('areas.show', compact('area'));
     }
 
     /**
@@ -70,7 +79,10 @@ class AreaController extends Controller
      */
     public function update(Request $request, Area $area)
     {
-        //
+        $data = $request->only('code', 'region_name', 'region_code', 'province_name', 'province_code', 'city_name', 'city_code', 'district_name', 'district_code', 'village_name', 'village_code');
+        $area->update($data);
+        Alert::success('Berhasil', "Berhasil memperbarui area");
+        return redirect()->back();
     }
 
     /**

@@ -19,9 +19,33 @@ class AreaDataTable extends DataTable
      */
     public function dataTable($query)
     {
+        $request = $this->request();
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'area.action');
+            ->filter(function ($filter) use ($request) {
+                if ($region_name = $request->query('region_name')) {
+                    $filter->where('region_name', $region_name);
+                }
+                if (($province_name = $request->query('province_name'))) {
+                    $filter->where('province_name', '=', $province_name);
+                }
+                if (($city_name = $request->query('city_name'))) {
+                    $filter->where('city_name', '=', $city_name);
+                }
+                if (($district_name = $request->query('district_name'))) {
+                    $filter->where('district_name', '=', $district_name);
+                }
+                if (($village_name = $request->query('village_name'))) {
+                    $filter->where('village_name', '=', $village_name);
+                }
+                if ($code = $request->query('code')) {
+                    $filter->where('code', 'like', "%$code%");
+                }
+            })
+            ->editColumn('action', function (Area $area) {
+                return '<a href="' . route('area.show', ['area' => $area->id]) . '" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i> Detail</a>';
+            })
+            ->rawColumns(['action']);
     }
 
     /**
@@ -45,25 +69,45 @@ class AreaDataTable extends DataTable
         return $this->builder()
             ->setTableId('paralegal-table')
             ->columns($this->getColumns())
-            ->minifiedAjax()
+            ->ajax([
+                'url' => '',
+                'data' => "function(d){
+                            d.region_name = $('#region').val();
+                            d.province_name = $('#province').val();
+                            d.city_name = $('#city').val();
+                            d.district_name = $('#district').val();
+                            d.village_name = $('#village').val();
+                            d.code = $('#code').val();
+                        }"
+            ])
             ->parameters([
                 'pageLength' => 10,
                 'processing' => true,
                 'serverSide' => true,
                 'responsive' => true,
+                'initComplete' => " 
+                            function() {
+                                $('#paralegal-filter').on('submit', function(e) {
+                                    window.LaravelDataTables['paralegal-table'].draw();
+                                    e.preventDefault();
+                                });
+
+                                $('#reset-filter').click(function(e) {
+                                    $('#region').val('').trigger('change');
+                                    $('#province').val('').trigger('change');
+                                    $('#city').val('').trigger('change');
+                                    $('#district').val('').trigger('change');
+                                    $('#village').val('').trigger('change');
+                                    $('#code').val('');
+                                    $('#paralegal-filter').submit();
+                                });
+                            }
+                        "
             ])
             ->dom(
                 "<'row'<'col-sm-12 col-md-4'l><'col-sm-12 col-md-8 text-right'B>>" .
                     "<'row'<'col-sm-12'tr>>" .
                     "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>"
-            )
-            ->orderBy(1)
-            ->buttons(
-                Button::make('create'),
-                Button::make('export'),
-                Button::make('print'),
-                Button::make('reset'),
-                Button::make('reload')
             );
     }
 
@@ -75,17 +119,21 @@ class AreaDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id')->title('ID'),
-            Column::make('region')->title('Region'),
-            Column::make('province')->title('Provinsi'),
-            Column::make('city')->title('Kota/Kabupaten'),
-            Column::make('district')->title('Kecamatan'),
-            Column::make('village')->title('Kelurahan/Desa'),
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
+            Column::make('code')
+                ->title('Kode'),
+            Column::make('region_name')
+                ->title('Region'),
+            Column::make('province_name')
+                ->title('Provinsi'),
+            Column::make('city_name')
+                ->title('Kota/Kabupaten'),
+            Column::make('district_name')
+                ->title('Kecamatan'),
+            Column::make('village_name')
+                ->title('Kelurahan/Desa'),
+            Column::make('action')
+                ->title('Aksi')
+                ->addClass('text-center')
         ];
     }
 

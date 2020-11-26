@@ -284,8 +284,18 @@ return [
         ],
         [
             'text' => 'Manajemen Area',
-            'route' => 'area.index',
-            'icon' => 'fas fa-fw fa-compass'
+            'icon' => 'fas fa-fw fa-compass',
+            'active' => ['area*'],
+            'submenu' => [
+                [
+                    'text' => 'Semua Area',
+                    'route' => 'area.index',
+                ],
+                [
+                    'text' => 'Tambah Area',
+                    'route' => 'area.create',
+                ]
+            ],
         ]
         // [
         //     'text'    => 'multilevel',

@@ -71,6 +71,7 @@ Route::prefix('/kasus')->group(function () {
 
 Route::prefix('/area')->group(function () {
     Route::get('/', 'AreaController@index')->name('area.index');
+    Route::get('/create', 'AreaController@create')->name('area.create');
     Route::post('/', 'AreaController@store')->name('area.store');
     Route::get('/{area}', 'AreaController@show')->name('area.show');
     Route::post('/{area}', 'AreaController@update')->name('area.update');
