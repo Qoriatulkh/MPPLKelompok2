@@ -82,7 +82,11 @@
             <div class="card-footer">
                 <button class="btn btn-block btn-success" id="editButton" data-toggle="modal"
                     data-target="#editAreaModal">Edit</button>
-                <button class="btn btn-block btn-danger" id="deleteButton">Hapus</button>
+                <form action="{{route('area.destroy', ['area' => $area->id])}}" id="deleteForm" method="POST">
+                    @csrf
+                    @method('DELETE')
+                </form>
+                <button class="btn btn-block btn-danger mt-3" id="deleteButton">Hapus</button>
             </div>
         </div>
     </div>
@@ -131,5 +135,20 @@
         $('#codeEdit').val(codeBefore.province + "." + codeBefore.city + "." + codeBefore.district + "." + $(this).val());
     });
 
+    $('#deleteButton').click(function(){
+        Swal.fire({
+            title: 'Konfirmasi',
+            text: "Apakah anda yakin akan menghapus area ini ?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#007bff',
+            cancelButtonColor: '#dc3545',
+            confirmButtonText: 'Ya, hapus'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $("#deleteForm").submit();
+            }
+        })
+    });
 </script>
 @endpush

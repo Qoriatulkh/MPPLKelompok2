@@ -111,6 +111,8 @@ class AreaController extends Controller
      */
     public function destroy(Area $area)
     {
-        //
+        $area->delete();
+        Alert::success("Berhasil", "Berhasil menghapus area");
+        return redirect()->route('area.index');
     }
 }

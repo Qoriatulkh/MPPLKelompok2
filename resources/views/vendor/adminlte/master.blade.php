@@ -76,7 +76,7 @@
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>
-    @include('sweetalert::alert')
+    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 
     {{-- Body Content --}}
     @yield('body')
