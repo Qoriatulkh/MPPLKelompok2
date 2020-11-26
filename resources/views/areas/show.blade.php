@@ -82,6 +82,7 @@
             <div class="card-footer">
                 <button class="btn btn-block btn-success" id="editButton" data-toggle="modal"
                     data-target="#editAreaModal">Edit</button>
+                <button class="btn btn-block btn-danger" id="deleteButton">Hapus</button>
             </div>
         </div>
     </div>

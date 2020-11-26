@@ -43,7 +43,25 @@ class AreaController extends Controller
      */
     public function store(Request $request)
     {
-        Area::create($request->only('code', 'region_name', 'region_code', 'province_name', 'province_code', 'city_name', 'city_code', 'district_name', 'district_code', 'village_name', 'village_code'));
+        $area = Area::where('code', strtoupper($request->code))->first();
+        if ($area) {
+            Alert::error("Gagal", "Area dengan kode tersebut sudah ada. Silahkan cek kode region, provinsi, kota/kab, kecamatan, ataupun kelurahan/desa agar tidak duplikat.");
+            return redirect()->back()->withInput()->withErrors(['code' => 'Mohon periksa kode agar tidak duplikat']);
+        }
+
+        Area::create([
+            'code' => strtoupper($request->code),
+            'region_name' => $request->region_name,
+            'region_code' => $request->region_code,
+            'province_name' => $request->province_name,
+            'province_code' => $request->province_code,
+            'city_name' => $request->city_name,
+            'city_code' => $request->city_code,
+            'district_name' => $request->district_name,
+            'district_code' => $request->district_code,
+            'village_name' => $request->village_name,
+            'village_code' => $request->village_code,
+        ]);
         Alert::success("Berhasil", "Berhasil menambah area");
         return redirect()->back();
     }
