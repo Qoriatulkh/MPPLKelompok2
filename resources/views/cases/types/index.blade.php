@@ -46,7 +46,9 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                {!! $dataTable->table(['class' => 'table table-hover'], true) !!}
+                <div class="table-responsive">
+                    {!! $dataTable->table(['class' => 'table table-hover'], true) !!}
+                </div>
             </div>
         </div>
     </div>
