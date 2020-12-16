@@ -137,6 +137,15 @@
 </div>
 
 <div class="row">
+    @if (!$user->isApproved)
+    <div class="col-12">
+        <div class="alert alert-primary">
+            Akun anda belum disetujui. Mohon tunggu persetujuan admin untuk bisa memasukkan kasus serta mendapatkan
+            nomor paralegal dan area.
+        </div>
+    </div>
+    @endif
+
     <div class="col-md-4 text-center">
         <div class="card card-outline card-primary">
             <div class="card-body">
