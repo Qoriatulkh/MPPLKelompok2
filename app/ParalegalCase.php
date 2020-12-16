@@ -9,7 +9,7 @@ use App\ParalegalCaseField;
 
 class ParalegalCase extends Model
 {
-    protected $table = 'paralegal_case';
+    protected $table = 'paralegal_cases';
 
     protected $fillable = ['id', 'paralegal_id', 'type_id', 'field_id', 'desc'];
 
