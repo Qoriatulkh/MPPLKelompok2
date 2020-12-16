@@ -99,11 +99,11 @@ class ParalegalController extends Controller
             return redirect()->back();
         }
 
-        $paralegalInAreaCount = str_pad(Paralegal::where('area_id', $request->area_id)->count() + 1, 3, 0, STR_PAD_LEFT);
+        $paralegalApprovedCount = str_pad(Paralegal::where('isApproved', 1)->count() + 1, 3, 0, STR_PAD_LEFT);
         $area = Area::find($request->area_id);
 
         $paralegal->isApproved = 1;
-        $paralegal->number = $area->code . ".$paralegal->altered_sex" . ".$paralegalInAreaCount";
+        $paralegal->number = $area->code . ".$paralegal->altered_sex" . ".$paralegalApprovedCount";
         $paralegal->area_id = $request->area_id;
         $paralegal->save();
 
