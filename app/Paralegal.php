@@ -16,18 +16,26 @@ class Paralegal extends Model
         'sex', 'isApproved', 'phoneNumber'
     ];
 
+    /**
+     * Accessors
+     */
+    public function getAlteredSexAttribute()
+    {
+        return $this->attributes['sex'] == 'Male' ? 'L' : 'P';
+    }
+
     public function area()
     {
-        $this->belongsTo(Area::class);
+        return $this->belongsTo(Area::class);
     }
 
     public function user()
     {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function cases()
     {
-        $this->hasMany(ParalegalCase::class);
+        return $this->hasMany(ParalegalCase::class);
     }
 }

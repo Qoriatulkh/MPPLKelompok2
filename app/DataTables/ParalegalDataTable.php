@@ -19,9 +19,31 @@ class ParalegalDataTable extends DataTable
      */
     public function dataTable($query)
     {
+        $no = 0;
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'paralegal.action');
+            ->editColumn('no', function (Paralegal $paralegal) use ($no) {
+                return ++$no;
+            })
+            ->editColumn('number', function (Paralegal $paralegal) {
+                return $paralegal->number ?? '-';
+            })
+            ->editColumn('name', function (Paralegal $paralegal) {
+                return $paralegal->user->name;
+            })
+            ->editColumn('sex', function (Paralegal $paralegal) {
+                return $paralegal->sex == 'Male' ? 'Laki-Laki' : 'Perempuan';
+            })
+            ->editColumn('address', function (Paralegal $paralegal) {
+                return $paralegal->address;
+            })
+            ->editColumn('status', function (Paralegal $paralegal) {
+                return $paralegal->isApproved ? '<span class="badge badge-success">Disetujui</span>' : '<span class="badge badge-danger">Belum Disetujui</span>';
+            })
+            ->editColumn('action', function (Paralegal $paralegal) {
+                return '<a href="' . route('paralegal.show', ['paralegal' => $paralegal->id]) . '" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i> Detail</a>';
+            })
+            ->rawColumns(['action', 'status']);
     }
 
     /**
@@ -57,7 +79,7 @@ class ParalegalDataTable extends DataTable
                     "<'row'<'col-sm-12'tr>>" .
                     "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>"
             )
-            ->orderBy(1)
+            ->orderBy(0)
             ->buttons(
                 Button::make('create'),
                 Button::make('export'),
@@ -75,15 +97,27 @@ class ParalegalDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('number')->title('Nomor Paralegal'),
-            Column::make('name')->title('Nama'),
-            Column::make('sex')->title('Jenis Kelamin'),
-            Column::make('address')->title('Alamat'),
+            Column::make('no')
+                ->orderable(false)
+                ->title('No.'),
+            Column::make('number')
+                ->title('Nomor Paralegal'),
+            Column::make('name')
+                ->title('Nama')
+                ->orderable(false),
+            Column::make('sex')
+                ->title('Jenis Kelamin'),
+            Column::make('address')
+                ->title('Alamat')
+                ->orderable(false),
+            Column::make('status')
+                ->title('Status'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
                 ->width(60)
-                ->addClass('text-center'),
+                ->addClass('text-center')
+                ->title('Aksi'),
         ];
     }
 

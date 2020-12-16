@@ -87,7 +87,9 @@
                 <h5>Daftar Paralegal</h5>
             </div>
             <div class="card-body">
-                {!! $dataTable->table(['class' => 'table table-hover'], true) !!}
+                <div class="table-responsive">
+                    {!! $dataTable->table(['class' => 'table table-hover'], true) !!}
+                </div>
             </div>
         </div>
     </div>

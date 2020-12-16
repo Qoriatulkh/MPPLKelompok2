@@ -12,7 +12,7 @@ class ProfileController extends Controller
     public function profile()
     {
         $user = auth()->user();
-        $user->load('paralegal');
+        $user->load('paralegal', 'paralegal.area');
 
         return view('profile', compact('user'));
     }
