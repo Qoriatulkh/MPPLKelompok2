@@ -208,11 +208,17 @@
         <div class="card card-outline {{ $user->paralegal->isApproved ? 'card-primary' : '' }}">
             @if (!auth()->user()->isAdmin())
             <div class="card-header text-right">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#changePasswordModal"><i
-                        class="fas fa-key"></i>
-                    Ganti Password</button>
-                <button class="btn btn-success" data-toggle="modal" data-target="#editModal"><i class="fas fa-edit"></i>
-                    Edit</button>
+                @if ($user->paralegal->isApproved)
+                <a class="btn btn-info" target="_blank" href="">
+                    <i class="fas fa-download"></i> Unduh Name Tag
+                </a>
+                @endif
+                <button class="btn btn-primary" data-toggle="modal" data-target="#changePasswordModal">
+                    <i class="fas fa-key"></i> Ganti Password
+                </button>
+                <button class="btn btn-success" data-toggle="modal" data-target="#editModal">
+                    <i class="fas fa-edit"></i> Edit
+                </button>
             </div>
             @endif
             <div class="card-body">

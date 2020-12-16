@@ -20,8 +20,25 @@ class ParalegalDataTable extends DataTable
     public function dataTable($query)
     {
         $no = 0;
+        $request = $this->request();
         return datatables()
             ->eloquent($query)
+            ->filter(function ($filter) use ($request) {
+                if ($area_id = $request->query('area_id')) {
+                    $filter->where('area_id', $area_id);
+                }
+                if (($sex = $request->query('gender'))) {
+                    $filter->where('sex', '=', $sex);
+                }
+                if (($number = $request->query('number'))) {
+                    $filter->where('number', 'like', "%$number%");
+                }
+                if ($name = $request->query('name')) {
+                    $filter->whereHas('user', function ($query) use ($name) {
+                        $query->where('name', 'like', "%$name%");
+                    });
+                }
+            })
             ->editColumn('no', function (Paralegal $paralegal) use ($no) {
                 return ++$no;
             })
@@ -67,26 +84,43 @@ class ParalegalDataTable extends DataTable
         return $this->builder()
             ->setTableId('paralegal-table')
             ->columns($this->getColumns())
-            ->minifiedAjax()
+            ->ajax([
+                'url' => '',
+                'data' => "function(d){
+                            d.area_id = $('#area').val();
+                            d.number = $('#number').val();
+                            d.name = $('#name').val();
+                            d.gender = $('#gender').val();
+                        }"
+            ])
             ->parameters([
                 'pageLength' => 10,
                 'processing' => true,
                 'serverSide' => true,
                 'responsive' => true,
+                'initComplete' => " 
+                            function() {
+                                $('#paralegal-filter').on('submit', function(e) {
+                                    window.LaravelDataTables['paralegal-table'].draw();
+                                    e.preventDefault();
+                                });
+
+                                $('#reset-filter').click(function(e) {
+                                    $('#area').val('').trigger('change');
+                                    $('#gender').val('').trigger('change');
+                                    $('#name').val('');
+                                    $('#number').val('');
+                                    $('#paralegal-filter').submit();
+                                });
+                            }
+                        "
             ])
             ->dom(
                 "<'row'<'col-sm-12 col-md-4'l><'col-sm-12 col-md-8 text-right'B>>" .
                     "<'row'<'col-sm-12'tr>>" .
                     "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>"
             )
-            ->orderBy(0)
-            ->buttons(
-                Button::make('create'),
-                Button::make('export'),
-                Button::make('print'),
-                Button::make('reset'),
-                Button::make('reload')
-            );
+            ->orderBy(0);
     }
 
     /**

@@ -16,65 +16,48 @@
         </button>
         <div class="collapse" id="collapseExample">
             <div class="card card-body">
-                <form action="">
+                <form method="GET" id="paralegal-filter" role="form">
                     <div class="row">
                         <div class="col-md-4 col-lg-4">
                             <div class="form-group">
-                                <label for="region">Region</label>
-                                <select class="form-control select2" name="region" id="region">
+                                <label for="area">Area</label>
+                                <select class="form-control select2" name="area_id" id="area">
                                     <option value="">Semua</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="district">Kecamatan</label>
-                                <select class="form-control select2" name="district" id="district">
-                                    <option value="">Semua</option>
+                                    @foreach ($areas as $area)
+                                    <option value="{{$area->id}}">
+                                        {{ $area->code . ' - ' . $area->village_name . ', ' . $area->district_name}}
+                                    </option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="number">Nomor Paralegal</label>
-                                <input type="text" class="form-control" id="number">
+                                <input type="text" class="form-control" id="number" name="number">
                             </div>
                         </div>
                         <div class="col-md-4 col-lg-4">
-                            <div class="form-group">
-                                <label for="province">Provinsi</label>
-                                <select class="form-control select2" name="province" id="province">
-                                    <option value="">Semua</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="village">Kelurahan</label>
-                                <select class="form-control select2" name="village" id="village">
-                                    <option value="">Semua</option>
-                                </select>
-                            </div>
                             <div class="form-group">
                                 <label for="name">Nama</label>
-                                <input type="text" class="form-control" id="name">
+                                <input type="text" class="form-control" id="name" name="name">
                             </div>
                         </div>
                         <div class="col-md-4 col-lg-4">
                             <div class="form-group">
-                                <label for="city">Kota / Kabupaten</label>
-                                <select class="form-control select2" name="city" id="city">
+                                <label for="gender">Jenis Kelamin</label>
+                                <select class="form-control select2" name="gender" id="gender">
                                     <option value="">Semua</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="city">Jenis Kelamin</label>
-                                <select class="form-control select2" name="city" id="city">
-                                    <option value="">Semua</option>
-                                    <option value="L">Laki - Laki</option>
-                                    <option value="P">Perempuan</option>
+                                    <option value="Male">Laki - Laki</option>
+                                    <option value="Female">Perempuan</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="text-right">
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i>
+                                <button type="submit" class="btn btn-primary" id="search-button"><i
+                                        class="fas fa-search"></i>
                                     Cari</button>
-                                <button type="button" class="btn btn-secondary"><i class="fas fa-undo-alt"></i>
+                                <button type="button" class="btn btn-secondary" id="reset-filter"><i
+                                        class="fas fa-undo-alt"></i>
                                     Reset</button>
                             </div>
                         </div>
@@ -98,4 +81,11 @@
 
 @push('js')
 {{$dataTable->scripts()}}
+
+<script>
+    $("#search-button").click(function(){
+        $('#paralegal-filter').submit();
+    });
+</script>
+
 @endpush

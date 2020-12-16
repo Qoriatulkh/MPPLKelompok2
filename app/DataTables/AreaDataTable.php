@@ -67,7 +67,7 @@ class AreaDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('paralegal-table')
+            ->setTableId('area-table')
             ->columns($this->getColumns())
             ->ajax([
                 'url' => '',
@@ -87,8 +87,8 @@ class AreaDataTable extends DataTable
                 'responsive' => true,
                 'initComplete' => " 
                             function() {
-                                $('#paralegal-filter').on('submit', function(e) {
-                                    window.LaravelDataTables['paralegal-table'].draw();
+                                $('#area-filter').on('submit', function(e) {
+                                    window.LaravelDataTables['area-table'].draw();
                                     e.preventDefault();
                                 });
 
@@ -99,7 +99,7 @@ class AreaDataTable extends DataTable
                                     $('#district').val('').trigger('change');
                                     $('#village').val('').trigger('change');
                                     $('#code').val('');
-                                    $('#paralegal-filter').submit();
+                                    $('#area-filter').submit();
                                 });
                             }
                         "

@@ -25,7 +25,7 @@
         </div>
         <div class="collapse" id="collapseExample">
             <div class="card card-body">
-                <form method="GET" id="paralegal-filter" role="form">
+                <form method="GET" id="area-filter" role="form">
                     <div class="row">
                         <div class="col-md-4 col-lg-4">
                             <div class="form-group">
@@ -117,7 +117,7 @@
     });
 
     $("#searchButton").click(function(){
-        $('#paralegal-filter').submit();
+        $('#area-filter').submit();
     });
 </script>
 

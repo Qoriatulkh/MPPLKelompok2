@@ -17,7 +17,8 @@ class ParalegalController extends Controller
      */
     public function index(ParalegalDataTable $paralegalDataTable)
     {
-        return $paralegalDataTable->render('paralegals.index');
+        $areas = Area::all();
+        return $paralegalDataTable->render('paralegals.index', compact('areas'));
     }
 
     /**
@@ -112,7 +113,9 @@ class ParalegalController extends Controller
 
     public function disapprove(Paralegal $paralegal)
     {
+        $user = $paralegal->user;
         $paralegal->delete();
+        $user->delete();
 
         Alert::success('Berhasil', "Berhasil menolak dan menghapus paralegal");
         return redirect()->route('paralegal.index');
