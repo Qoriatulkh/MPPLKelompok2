@@ -247,8 +247,8 @@
                                 Area
                             </td>
                             <td>
-                                {{ $user->paralegal->area_id ? $user->paralegal->area->village_name . "," . $user->paralegal->area->district_name . ","
-                                .$user->paralegal->area->city_name . "," .$user->paralegal->area->province_name . ","
+                                {{ $user->paralegal->area_id ? $user->paralegal->area->village_name . ", " . $user->paralegal->area->district_name . ", "
+                                .$user->paralegal->area->city_name . ", " .$user->paralegal->area->province_name . ", "
                                 .$user->paralegal->area->region_name : '-'}}
                             </td>
                         </tr>
