@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'id','name', 'role_id','email', 'password',
+        'id', 'name', 'role_id', 'email', 'password',
     ];
 
     /**
@@ -43,9 +43,14 @@ class User extends Authenticatable
     {
         $this->hasOne(Role::class);
     }
-    
+
     public function paralegal()
     {
-        return $this-hasOne(Paralegal::class);
+        return $this->hasOne(Paralegal::class);
+    }
+
+    public function isAdmin()
+    {
+        return $this->role_id == Role::ROLE_ADMIN;
     }
 }

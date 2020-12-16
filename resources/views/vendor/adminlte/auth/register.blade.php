@@ -18,20 +18,20 @@
     {{ csrf_field() }}
 
     {{-- Username field --}}
-    <div class="input-group mb-3">
+    {{-- <div class="input-group mb-3">
         <input type="text" name="username" class="form-control {{ $errors->has('username') ? 'is-invalid' : '' }}"
-            value="{{ old('username') }}" placeholder="Username" autofocus>
-        <div class="input-group-append">
-            <div class="input-group-text">
-                <span class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span>
-            </div>
+    value="{{ old('username') }}" placeholder="Username" autofocus>
+    <div class="input-group-append">
+        <div class="input-group-text">
+            <span class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span>
         </div>
-        @if($errors->has('username'))
-        <div class="invalid-feedback">
-            <strong>{{ $errors->first('username') }}</strong>
-        </div>
-        @endif
     </div>
+    @if($errors->has('username'))
+    <div class="invalid-feedback">
+        <strong>{{ $errors->first('username') }}</strong>
+    </div>
+    @endif
+    </div> --}}
 
     {{-- Name field --}}
     <div class="input-group mb-3">
@@ -67,8 +67,8 @@
 
     {{-- Address field --}}
     <div class="input-group mb-3">
-        <input type="address" name="address" class="form-control {{ $errors->has('address') ? 'is-invalid' : '' }}"
-            value="{{ old('address') }}" placeholder="Alamat">
+        <textarea type="address" name="address" class="form-control {{ $errors->has('address') ? 'is-invalid' : '' }}"
+            placeholder="Alamat">{{ old('address') }}</textarea>
         <div class="input-group-append">
             <div class="input-group-text">
                 <span class="fas fa-map-marker {{ config('adminlte.classes_auth_icon', '') }}"></span>
@@ -82,33 +82,51 @@
     </div>
 
     {{-- Gender field --}}
-    <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
-        <div class="form-group">
-            <select class="form-control" id="sel1">
-                <option>Pilih jenis kelamin</option>
-                <option>Laki-laki</option>
-                <option>Perempuan</option>
-            </select>
-            @if ($errors->has('name'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('gender') }}</strong>
-                </span>
-            @endif
+    <div class="input-group mb-3">
+        <select class="form-control {{ $errors->has('gender') ? 'is-invalid' : '' }}" id="sel1" name="gender">
+            <option disabled selected value="">Pilih jenis kelamin</option>
+            <option value="Male">Laki-laki</option>
+            <option value="Female">Perempuan</option>
+        </select>
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-mars-double {{ config('adminlte.classes_auth_icon', '') }}"></span>
+            </div>
         </div>
+        @if($errors->has('gender'))
+        <div class="invalid-feedback">
+            <strong>{{ $errors->first('gender') }}</strong>
+        </div>
+        @endif
     </div>
+    {{-- <div class="form-group{{ $errors->has('sex') ? ' is-invalid' : '' }}">
+    <div class="form-group">
+        <select class="form-control" id="sel1" name="sex">
+            <option disabled selected>Pilih jenis kelamin</option>
+            <option value="Male">Laki-laki</option>
+            <option value="Female">Perempuan</option>
+        </select>
+        @if ($errors->has('sex'))
+        <span class="invalid-feedback">
+            <strong>{{ $errors->first('sex') }}</strong>
+        </span>
+        @endif
+    </div>
+    </div> --}}
 
     {{-- Phone number field --}}
     <div class="input-group mb-3">
-        <input type="number" name="phone" class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}"
-            value="{{ old('phone') }}" placeholder="Nomor telepon">
+        <input type="number" name="phoneNumber"
+            class="form-control {{ $errors->has('phoneNumber') ? 'is-invalid' : '' }}" value="{{ old('phoneNumber') }}"
+            placeholder="Nomor telepon">
         <div class="input-group-append">
             <div class="input-group-text">
                 <span class="fas fa-phone{{ config('adminlte.classes_auth_icon', '') }}"></span>
             </div>
         </div>
-        @if($errors->has('address'))
+        @if($errors->has('phoneNumber'))
         <div class="invalid-feedback">
-            <strong>{{ $errors->first('address') }}</strong>
+            <strong>{{ $errors->first('phoneNumber') }}</strong>
         </div>
         @endif
     </div>
@@ -116,7 +134,7 @@
     {{-- Password field --}}
     <div class="input-group mb-3">
         <input type="password" name="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}"
-            placeholder="Kata sandi">
+            placeholder="Kata sandi" value="{{ old('password') }}">
         <div class="input-group-append">
             <div class="input-group-text">
                 <span class="fas fa-lock {{ config('adminlte.classes_auth_icon', '') }}"></span>
@@ -133,7 +151,7 @@
     <div class="input-group mb-3">
         <input type="password" name="password_confirmation"
             class="form-control {{ $errors->has('password_confirmation') ? 'is-invalid' : '' }}"
-            placeholder="Ketik ulang kata sandi">
+            placeholder="Ketik ulang kata sandi" value="{{ old('password_confirmation') }}">
         <div class="input-group-append">
             <div class="input-group-text">
                 <span class="fas fa-lock {{ config('adminlte.classes_auth_icon', '') }}"></span>

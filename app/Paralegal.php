@@ -11,18 +11,23 @@ class Paralegal extends Model
 {
     protected $table = 'paralegals';
 
-    protected $fillable = ['id', 'user_id','area_id','number','name','address',
-    'sex','isAprroved','phoneNumber'];
+    protected $fillable = [
+        'id', 'user_id', 'area_id', 'number', 'name', 'address',
+        'sex', 'isApproved', 'phoneNumber'
+    ];
 
-    public function area(){
+    public function area()
+    {
         $this->belongsTo(Area::class);
     }
 
-    public function user(){
+    public function user()
+    {
         $this->belongsTo(User::class);
     }
 
-    public function cases(){
+    public function cases()
+    {
         $this->hasMany(ParalegalCase::class);
     }
 }

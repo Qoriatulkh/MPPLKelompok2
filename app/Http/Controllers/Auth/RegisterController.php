@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Paralegal;
 use App\Providers\RouteServiceProvider;
+use App\Role;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -49,11 +51,15 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        $validator = Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password_confirmation' => ['required'],
+            'gender' => ['required'],
+            'phoneNumber' => ['required'],
         ]);
+        return $validator;
     }
 
     /**
@@ -64,10 +70,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'role_id' => Role::ROLE_PARALEGAL,
             'password' => Hash::make($data['password']),
         ]);
+
+        $paralegal = Paralegal::create([
+            'user_id' => $user->id,
+            'address' => $data['address'],
+            'sex' => $data['gender'],
+            'isApproved' => 0,
+            'phoneNumber' => $data['phoneNumber']
+        ]);
+
+        return $user;
     }
 }

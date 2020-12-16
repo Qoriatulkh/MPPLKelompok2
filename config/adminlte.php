@@ -248,10 +248,17 @@ return [
             'label_color' => 'success',
         ],
         [
+            'text' => 'Profil',
+            'route' => 'profile',
+            'icon' => 'fas fa-fw fa-user',
+            'can' => 'update-profile'
+        ],
+        [
             'text' => 'Manajemen Paralegal',
             'icon' => 'fas fa-fw fa-users',
             'active' => ['paralegal*'],
             'classes' => 'mt-3',
+            'can' => 'manage-paralegals',
             'submenu' => [
                 [
                     'text' => 'Semua Paralegal',
@@ -275,10 +282,12 @@ return [
                 [
                     'text' => 'Bidang Kasus',
                     'route' => 'case.field.index',
+                    'can' => 'manage-cases'
                 ],
                 [
                     'text' => 'Jenis Kasus',
                     'route' => 'case.type.index',
+                    'can' => 'manage-cases'
                 ],
             ]
         ],
@@ -286,6 +295,7 @@ return [
             'text' => 'Manajemen Area',
             'icon' => 'fas fa-fw fa-compass',
             'active' => ['area*'],
+            'can' => 'manage-areas',
             'submenu' => [
                 [
                     'text' => 'Semua Area',
