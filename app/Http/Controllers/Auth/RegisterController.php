@@ -75,6 +75,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'role_id' => Role::ROLE_PARALEGAL,
             'password' => Hash::make($data['password']),
+            'information' => 'Daftar sendiri'
         ]);
 
         $paralegal = Paralegal::create([

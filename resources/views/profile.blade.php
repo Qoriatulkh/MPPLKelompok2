@@ -291,6 +291,16 @@
                                 : '<span class="badge badge-danger">Belum Disetujui</span>' !!}
                             </td>
                         </tr>
+                        @if (auth()->user()->isAdmin())
+                        <tr>
+                            <td class="font-weight-bold">
+                                Informasi Akun
+                            </td>
+                            <td>
+                                {{ $user->information }}
+                            </td>
+                        </tr>
+                        @endif
                     </table>
 
                 </div>

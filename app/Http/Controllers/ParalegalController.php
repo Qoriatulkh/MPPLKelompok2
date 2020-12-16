@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use App\Area;
 use App\DataTables\ParalegalDataTable;
 use App\Paralegal;
+use App\Role;
+use App\User;
+use Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ParalegalController extends Controller
@@ -28,7 +32,8 @@ class ParalegalController extends Controller
      */
     public function create()
     {
-        //
+        $areas = Area::all();
+        return view('paralegals.create', compact('areas'));
     }
 
     /**
@@ -39,7 +44,44 @@ class ParalegalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $user = auth()->user();
+        $altered_sex = $data['gender'] == 'Male' ? 'L' : 'P';
+
+        Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password_confirmation' => ['required'],
+            'gender' => ['required'],
+            'phoneNumber' => ['required'],
+            'area_id' => ['required'],
+            'address' => ['required']
+        ])->validate();
+
+        $paralegalApprovedCount = str_pad(Paralegal::where('isApproved', 1)->count() + 1, 3, 0, STR_PAD_LEFT);
+        $area = Area::find($data['area_id']);
+
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'role_id' => Role::ROLE_PARALEGAL,
+            'password' => Hash::make($data['password']),
+            'information' => "Didaftarkan $user->name"
+        ]);
+
+        Paralegal::create([
+            'user_id' => $user->id,
+            'number' => $area->code . ".$altered_sex" . ".$paralegalApprovedCount",
+            'area_id' => $data['area_id'],
+            'address' => $data['address'],
+            'sex' => $data['gender'],
+            'isApproved' => 1,
+            'phoneNumber' => $data['phoneNumber']
+        ]);
+
+        Alert::success("Berhasil", "Berhasil membuat akun paralegal baru");
+        return redirect()->route('paralegal.index');
     }
 
     /**
