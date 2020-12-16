@@ -46,7 +46,6 @@ class ParalegalController extends Controller
     {
         $data = $request->all();
         $user = auth()->user();
-        $altered_sex = $data['gender'] == 'Male' ? 'L' : 'P';
 
         Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
@@ -59,6 +58,7 @@ class ParalegalController extends Controller
             'address' => ['required']
         ])->validate();
 
+        $altered_sex = $data['gender'] == 'Male' ? 'L' : 'P';
         $paralegalApprovedCount = str_pad(Paralegal::where('isApproved', 1)->count() + 1, 3, 0, STR_PAD_LEFT);
         $area = Area::find($data['area_id']);
 
