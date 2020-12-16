@@ -13,7 +13,7 @@ class CreateParalegalCaseFieldsTable extends Migration
      */
     public function up()
     {
-        Schema::create('paralegalCaseField', function (Blueprint $table) {
+        Schema::create('paralegal_case_fields', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateParalegalCaseFieldsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paralegalCaseField');
+        Schema::dropIfExists('paralegal_case_fields');
     }
 }

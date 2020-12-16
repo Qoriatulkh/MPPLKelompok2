@@ -13,14 +13,14 @@ class CreateParalegalCasesTable extends Migration
      */
     public function up()
     {
-        Schema::create('paralegalCase', function (Blueprint $table) {
+        Schema::create('paralegal_cases', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('paralegal_id')->unsigned();
             $table->foreign('paralegal_id')->references('id')->on('paralegals')->onDelete('CASCADE');
             $table->integer('type_id')->unsigned();
-            $table->foreign('type_id')->references('id')->on('paralegalCaseTypes')->onDelete('CASCADE');
+            $table->foreign('type_id')->references('id')->on('paralegal_case_types')->onDelete('CASCADE');
             $table->integer('field_id')->unsigned();
-            $table->foreign('field_id')->references('id')->on('paralegalCaseField')->onDelete('CASCADE');
+            $table->foreign('field_id')->references('id')->on('paralegal_case_fields')->onDelete('CASCADE');
             $table->string('desc');
             $table->timestamps();
         });
@@ -33,6 +33,6 @@ class CreateParalegalCasesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paralegalCase');
+        Schema::dropIfExists('paralegal_cases');
     }
 }

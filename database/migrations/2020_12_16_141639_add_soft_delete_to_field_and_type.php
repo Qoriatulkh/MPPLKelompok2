@@ -13,10 +13,10 @@ class AddSoftDeleteToFieldAndType extends Migration
      */
     public function up()
     {
-        Schema::table('paralegalcasefield', function (Blueprint $table) {
+        Schema::table('paralegal_case_fields', function (Blueprint $table) {
             $table->softDeletes();
         });
-        Schema::table('paralegalcasetypes', function (Blueprint $table) {
+        Schema::table('paralegal_case_types', function (Blueprint $table) {
             $table->softDeletes();
         });
     }
@@ -28,10 +28,10 @@ class AddSoftDeleteToFieldAndType extends Migration
      */
     public function down()
     {
-        Schema::table('paralegalcasefield', function (Blueprint $table) {
+        Schema::table('paralegal_case_fields', function (Blueprint $table) {
             $table->dropSoftDeletes();
         });
-        Schema::table('paralegalcasetypes', function (Blueprint $table) {
+        Schema::table('paralegal_case_types', function (Blueprint $table) {
             $table->dropSoftDeletes();
         });
     }

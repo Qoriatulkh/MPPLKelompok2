@@ -10,7 +10,7 @@ class ParalegalCaseType extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'paralegalCaseTypes';
+    protected $table = 'paralegal_case_types';
 
     protected $fillable = ['id', 'name'];
 

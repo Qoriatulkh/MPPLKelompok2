@@ -13,7 +13,7 @@ class CreateParalegalCaseTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('paralegalCaseTypes', function (Blueprint $table) {
+        Schema::create('paralegal_case_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateParalegalCaseTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paralegalCaseTypes');
+        Schema::dropIfExists('paralegal_case_types');
     }
 }
