@@ -140,7 +140,9 @@
     @if (!$user->isApproved)
     <div class="col-12">
         <div class="alert alert-primary">
-            Akun anda belum disetujui. Mohon tunggu persetujuan admin untuk bisa memasukkan kasus serta mendapatkan
+            <b class="font-weight-bolder">Perhatian! Akun anda belum disetujui.</b> Mohon tunggu persetujuan admin untuk
+            bisa
+            memasukkan kasus serta mendapatkan
             nomor paralegal dan area.
         </div>
     </div>
