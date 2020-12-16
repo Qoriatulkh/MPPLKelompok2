@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\ParalegalCaseTypeDataTable;
 use App\ParalegalCaseType;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ParalegalCaseTypeController extends Controller
 {
@@ -36,7 +37,12 @@ class ParalegalCaseTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $type = ParalegalCaseType::create([
+            'name' => $request->name
+        ]);
+
+        Alert::success('Berhasil', "Berhasil menambah jenis kasus " . $type->name);
+        return redirect()->back();
     }
 
     /**
@@ -81,6 +87,9 @@ class ParalegalCaseTypeController extends Controller
      */
     public function destroy(ParalegalCaseType $paralegalCaseType)
     {
-        //
+        $paralegalCaseType->delete();
+
+        Alert::success("Berhasil", "Berhasil menghapus bidang kasus " . $paralegalCaseType->name);
+        return redirect()->back();
     }
 }

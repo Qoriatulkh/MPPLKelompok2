@@ -81,12 +81,12 @@ class ParalegalCaseFieldDataTable extends DataTable
                             var form = $('#deleteCaseFieldForm-'+id);
                             Swal.fire({
                                 title: 'Konfirmasi',
-                                html: 'Anda yakin ingin menghapus bidang <b>'+nama+'</b> ?',
+                                html: 'Anda yakin ingin menghapus bidang kasus <b>'+nama+'</b> ?',
                                 icon: 'warning',
                                 showCancelButton: true,
                                 confirmButtonColor: '#3085d6',
                                 cancelButtonColor: '#d33',
-                                confirmButtonText: 'Ya, Lanjutkan',
+                                confirmButtonText: 'Ya, Hapus',
                                 cancelButtonText: 'Batalkan'
                             }).then((result) => {
                                 if (result.value) {

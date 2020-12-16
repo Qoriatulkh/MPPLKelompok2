@@ -89,7 +89,7 @@ class ParalegalCaseFieldController extends Controller
     {
         $paralegalCaseField->delete();
 
-        Alert::success("Berhasil", "Berhasil menghapus bidang " . $paralegalCaseField->name);
+        Alert::success("Berhasil", "Berhasil menghapus bidang kasus " . $paralegalCaseField->name);
         return redirect()->back();
     }
 }

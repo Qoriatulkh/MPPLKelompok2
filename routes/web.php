@@ -64,7 +64,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/{paralegalCaseType}/show', 'ParalegalCaseTypeController@show')->name('case.type.show');
             Route::get('/{paralegalCaseType}/edit', 'ParalegalCaseTypeController@edit')->name('case.type.edit');
             Route::post('/{paralegalCaseType}/update', 'ParalegalCaseTypeController@update')->name('case.type.update');
-            Route::delete('/{paralegalCaseType}/delete', 'ParalegalCaseTypeController@destroy')->name('case.type.destroy');
+            Route::post('/{paralegalCaseType}/delete', 'ParalegalCaseTypeController@destroy')->name('case.type.destroy');
         });
 
         // Fields
