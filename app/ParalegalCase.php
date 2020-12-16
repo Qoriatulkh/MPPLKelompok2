@@ -9,20 +9,22 @@ use App\ParalegalCaseField;
 
 class ParalegalCase extends Model
 {
-    protected $table = 'paralegalCase';
+    protected $table = 'paralegal_case';
 
-    protected $fillable = ['id', 'paralegal_id','type_id','field_id','desc'];
+    protected $fillable = ['id', 'paralegal_id', 'type_id', 'field_id', 'desc'];
 
-    public function paralegal(){
+    public function paralegal()
+    {
         $this->belongsTo(Paralegal::class);
     }
 
-    public function type(){
+    public function type()
+    {
         $this->belongsTo(ParalegalCaseType::class);
     }
 
-    public function field(){
+    public function field()
+    {
         $this->belongsTo(ParalegalCaseField::class);
     }
-
 }
