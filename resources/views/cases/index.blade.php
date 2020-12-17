@@ -23,6 +23,22 @@
                                 <label for="name">Nama Kasus</label>
                                 <input type="text" class="form-control" id="name">
                             </div>
+                        </div>
+                        <div class="col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label for="description">Dari Tanggal</label>
+                                <input class="form-control datepicker" data-provide="datepicker" type="text"
+                                    name="fromDate" value="" id="fromDate">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label for="description">Sampai Tanggal</label>
+                                <input class="form-control datepicker" data-provide="datepicker" type="text"
+                                    name="untilDate" value="" id="untilDate">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-lg-4">
                             <div class="form-group">
                                 <label for="region">Area</label>
                                 <select class="form-control select2" name="area_id" id="area_id">
@@ -34,6 +50,9 @@
                                     @endforeach
                                 </select>
                             </div>
+                        </div>
+                        @if (auth()->user()->isAdmin())
+                        <div class="col-md-4 col-lg-4">
                             <div class="form-group">
                                 <label for="name">Paralegal</label>
                                 <select class="form-control select2" name="paralegal_id" id="paralegal_id">
@@ -45,12 +64,8 @@
                                 </select>
                             </div>
                         </div>
+                        @endif
                         <div class="col-md-4 col-lg-4">
-                            <div class="form-group">
-                                <label for="description">Dari Tanggal</label>
-                                <input class="form-control datepicker" data-provide="datepicker" type="text"
-                                    name="fromDate" value="" id="fromDate">
-                            </div>
                             <div class="form-group">
                                 <label for="type">Jenis</label>
                                 <select class="form-control select2" name="type_id" id="type_id">
@@ -60,6 +75,8 @@
                                     @endforeach
                                 </select>
                             </div>
+                        </div>
+                        <div class="col-md-4 col-lg-4">
                             <div class="form-group">
                                 <label for="field">Status</label>
                                 <select class="form-control select2" name="status_id" id="status_id">
@@ -72,11 +89,6 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-lg-4">
-                            <div class="form-group">
-                                <label for="description">Sampai Tanggal</label>
-                                <input class="form-control datepicker" data-provide="datepicker" type="text"
-                                    name="untilDate" value="" id="untilDate">
-                            </div>
                             <div class="form-group">
                                 <label for="field">Bidang</label>
                                 <select class="form-control select2" name="field_id" id="field_id">

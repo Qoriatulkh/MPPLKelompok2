@@ -23,7 +23,11 @@ class ParalegalCaseController extends Controller
      */
     public function index(ParalegalCaseDataTable $paralegalCaseDataTable)
     {
-        $paralegals = Paralegal::all();
+        if (auth()->user()->isAdmin()) {
+            $paralegals = Paralegal::all();
+        } else {
+            $paralegals = [];
+        }
         $areas = Area::all();
         $types = ParalegalCaseType::all();
         $fields = ParalegalCaseField::all();
