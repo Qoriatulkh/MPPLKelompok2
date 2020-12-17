@@ -102,13 +102,8 @@ class ProfileController extends Controller
     {
         $user = auth()->user();
 
-        if (!$user->paralegal->photo_url) {
-            Alert::error("Gagal", "Mohon upload foto profil terlebih dahulu");
-            return redirect()->route('profile');
-        }
-
         $img = Image::make(public_path('image/template-nametag.png'));
-        $profile = Image::make(public_path('storage/' . $user->paralegal->photo_url));
+        $profile = Image::make(public_path($user->paralegal->photo_url ? 'storage/' . $user->paralegal->photo_url : 'image/default-user-image.png'));
         $profile->resize(336, 444);
 
         $img->insert($profile, 'top-left', 175, 337);
