@@ -34,16 +34,18 @@ Route::middleware('auth')->group(function () {
         Route::post('/photo/upload', 'ProfileController@uploadPhoto')->name('profile.photo.upload');
     });
 
-    Route::prefix('/paralegal')->group(function () {
-        Route::get('/', 'ParalegalController@index')->name('paralegal.index');
-        Route::get('/create', 'ParalegalController@create')->name('paralegal.create');
-        Route::post('/', 'ParalegalController@store')->name('paralegal.store');
-        Route::get('/{paralegal}', 'ParalegalController@show')->name('paralegal.show');
-        Route::post('/{paralegal}/approve', 'ParalegalController@approve')->name('paralegal.approve');
-        Route::post('/{paralegal}/disapprove', 'ParalegalController@disapprove')->name('paralegal.disapprove');
-        Route::get('/{paralegal}/edit', 'ParalegalController@edit')->name('paralegal.edit');
-        Route::post('/{paralegal}', 'ParalegalController@update')->name('paralegal.update');
-        Route::delete('/{paralegal}', 'ParalegalController@destroy')->name('paralegal.destroy');
+    Route::middleware('admin')->group(function () {
+        Route::prefix('/paralegal')->group(function () {
+            Route::get('/', 'ParalegalController@index')->name('paralegal.index');
+            Route::get('/create', 'ParalegalController@create')->name('paralegal.create');
+            Route::post('/', 'ParalegalController@store')->name('paralegal.store');
+            Route::get('/{paralegal}', 'ParalegalController@show')->name('paralegal.show');
+            Route::post('/{paralegal}/approve', 'ParalegalController@approve')->name('paralegal.approve');
+            Route::post('/{paralegal}/disapprove', 'ParalegalController@disapprove')->name('paralegal.disapprove');
+            Route::get('/{paralegal}/edit', 'ParalegalController@edit')->name('paralegal.edit');
+            Route::post('/{paralegal}', 'ParalegalController@update')->name('paralegal.update');
+            Route::delete('/{paralegal}', 'ParalegalController@destroy')->name('paralegal.destroy');
+        });
     });
 
     // Cases
@@ -56,26 +58,28 @@ Route::middleware('auth')->group(function () {
         Route::post('/{paralegalCase}/update', 'ParalegalCaseController@update')->name('case.update');
         Route::delete('/{paralegalCase}/delete', 'ParalegalCaseController@destroy')->name('case.destroy');
 
-        // Types
-        Route::prefix('jenis')->group(function () {
-            Route::get('/', 'ParalegalCaseTypeController@index')->name('case.type.index');
-            Route::get('/create', 'ParalegalCaseTypeController@create')->name('case.type.create');
-            Route::post('/store', 'ParalegalCaseTypeController@store')->name('case.type.store');
-            Route::get('/{paralegalCaseType}/show', 'ParalegalCaseTypeController@show')->name('case.type.show');
-            Route::get('/{paralegalCaseType}/edit', 'ParalegalCaseTypeController@edit')->name('case.type.edit');
-            Route::post('/{paralegalCaseType}/update', 'ParalegalCaseTypeController@update')->name('case.type.update');
-            Route::post('/{paralegalCaseType}/delete', 'ParalegalCaseTypeController@destroy')->name('case.type.destroy');
-        });
+        Route::middleware('admin')->group(function () {
+            // Types
+            Route::prefix('jenis')->group(function () {
+                Route::get('/', 'ParalegalCaseTypeController@index')->name('case.type.index');
+                Route::get('/create', 'ParalegalCaseTypeController@create')->name('case.type.create');
+                Route::post('/store', 'ParalegalCaseTypeController@store')->name('case.type.store');
+                Route::get('/{paralegalCaseType}/show', 'ParalegalCaseTypeController@show')->name('case.type.show');
+                Route::get('/{paralegalCaseType}/edit', 'ParalegalCaseTypeController@edit')->name('case.type.edit');
+                Route::post('/{paralegalCaseType}/update', 'ParalegalCaseTypeController@update')->name('case.type.update');
+                Route::post('/{paralegalCaseType}/delete', 'ParalegalCaseTypeController@destroy')->name('case.type.destroy');
+            });
 
-        // Fields
-        Route::prefix('bidang')->group(function () {
-            Route::get('/', 'ParalegalCaseFieldController@index')->name('case.field.index');
-            Route::get('/create', 'ParalegalCaseFieldController@create')->name('case.field.create');
-            Route::post('/store', 'ParalegalCaseFieldController@store')->name('case.field.store');
-            Route::get('/{paralegalCaseField}/show', 'ParalegalCaseFieldController@show')->name('case.field.show');
-            Route::get('/{paralegalCaseField}/edit', 'ParalegalCaseFieldController@edit')->name('case.field.edit');
-            Route::post('/{paralegalCaseField}/update', 'ParalegalCaseFieldController@update')->name('case.field.update');
-            Route::post('/{paralegalCaseField}/delete', 'ParalegalCaseFieldController@destroy')->name('case.field.destroy');
+            // Fields
+            Route::prefix('bidang')->group(function () {
+                Route::get('/', 'ParalegalCaseFieldController@index')->name('case.field.index');
+                Route::get('/create', 'ParalegalCaseFieldController@create')->name('case.field.create');
+                Route::post('/store', 'ParalegalCaseFieldController@store')->name('case.field.store');
+                Route::get('/{paralegalCaseField}/show', 'ParalegalCaseFieldController@show')->name('case.field.show');
+                Route::get('/{paralegalCaseField}/edit', 'ParalegalCaseFieldController@edit')->name('case.field.edit');
+                Route::post('/{paralegalCaseField}/update', 'ParalegalCaseFieldController@update')->name('case.field.update');
+                Route::post('/{paralegalCaseField}/delete', 'ParalegalCaseFieldController@destroy')->name('case.field.destroy');
+            });
         });
     });
 

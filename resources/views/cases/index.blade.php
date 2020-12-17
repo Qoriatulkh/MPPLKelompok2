@@ -51,7 +51,6 @@
                                 </select>
                             </div>
                         </div>
-                        @if (auth()->user()->isAdmin())
                         <div class="col-md-4 col-lg-4">
                             <div class="form-group">
                                 <label for="name">Paralegal</label>
@@ -59,12 +58,13 @@
                                     <option value="">Semua</option>
                                     @foreach ($paralegals as $paralegal)
                                     <option value="{{$paralegal->id}}">
-                                        {{ $paralegal->number . ' - ' . $paralegal->user->name}}</option>
+                                        {{ $paralegal->number . ' - ' . $paralegal->user->name}}
+                                        {{ $paralegal->user->id == auth()->user()->id ? "(me)" : "" }}
+                                    </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
-                        @endif
                         <div class="col-md-4 col-lg-4">
                             <div class="form-group">
                                 <label for="type">Jenis</label>

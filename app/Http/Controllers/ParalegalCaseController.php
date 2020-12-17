@@ -24,11 +24,7 @@ class ParalegalCaseController extends Controller
      */
     public function index(ParalegalCaseDataTable $paralegalCaseDataTable)
     {
-        if (auth()->user()->isAdmin()) {
-            $paralegals = Paralegal::all();
-        } else {
-            $paralegals = [];
-        }
+        $paralegals = Paralegal::all()->load('user');
         $areas = Area::all();
         $types = ParalegalCaseType::all();
         $fields = ParalegalCaseField::all();
@@ -106,9 +102,9 @@ class ParalegalCaseController extends Controller
     public function show(ParalegalCase $paralegalCase)
     {
         $statuses = ParalegalCaseStatus::all();
-        if (!auth()->user()->isAdmin() && $paralegalCase->paralegal_id != auth()->user()->paralegal->id) {
-            abort(403);
-        }
+        // if (!auth()->user()->isAdmin() && $paralegalCase->paralegal_id != auth()->user()->paralegal->id) {
+        //     abort(403);
+        // }
         return view('cases.show', compact('paralegalCase', 'statuses'));
     }
 

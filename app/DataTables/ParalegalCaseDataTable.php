@@ -86,9 +86,9 @@ class ParalegalCaseDataTable extends DataTable
     public function query(ParalegalCase $model)
     {
         $model = $model->newQuery();
-        if (!auth()->user()->isAdmin()) {
-            $model->where('paralegal_id', auth()->user()->paralegal->id);
-        }
+        // if (!auth()->user()->isAdmin()) {
+        //     $model->where('paralegal_id', auth()->user()->paralegal->id);
+        // }
 
         return $model;
     }

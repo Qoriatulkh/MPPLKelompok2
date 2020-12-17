@@ -9,6 +9,7 @@
 
 @section('content')
 
+@if (auth()->user()->isAdmin() || auth()->user()->paralegal->id == $paralegalCase->paralegal_id)
 <div class="modal fade" id="updateStatusModal" tabindex="-1" role="dialog" aria-labelledby="updateStatusModalTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -53,6 +54,7 @@
         </div>
     </div>
 </div>
+@endif
 
 <div class="card card-outline card-primary">
     <div class="card-header text-center">
@@ -95,22 +97,27 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="district_code">Paralegal</label> <span><a
-                            href="{{ route('paralegal.show', ['paralegal' => $paralegalCase->paralegal_id]) }}"
+                    <label for="district_code">Paralegal</label>
+                    @if (auth()->user()->isAdmin() || auth()->user()->paralegal->id == $paralegalCase->paralegal_id)
+                    <span><a href="{{ auth()->user()->isAdmin() ? route('paralegal.show', ['paralegal' => $paralegalCase->paralegal_id]) : route('profile') }}"
                             class="btn btn-xs btn-primary px-2">
                             <i class="fas fa-eye"></i> Detail</a></span>
+                    @endif
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" value="{{ $paralegalCase->paralegal->user->name }}"
+                        <input type="text" class="form-control"
+                            value="{{ $paralegalCase->paralegal->user->name . " ( " . $paralegalCase->paralegal->number . " )" }}"
                             disabled>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="district_code">Area</label> <span><a
-                            href="{{ route('area.show', ['area' => $paralegalCase->paralegal->area_id]) }}"
+                    <label for="district_code">Area</label>
+                    @if (auth()->user()->isAdmin())
+                    <span><a href="{{ route('area.show', ['area' => $paralegalCase->paralegal->area_id]) }}"
                             class="btn btn-xs btn-primary px-2">
                             <i class="fas fa-eye"></i> Detail</a></span>
+                    @endif
                     <div class="input-group mb-3">
                         <textarea type="text" class="form-control" value="" disabled>{{ $paralegalCase->paralegal->area->code . ' - ' . $paralegalCase->paralegal->area->village_name . ', ' . $paralegalCase->paralegal->area->district_name . ', ' . $paralegalCase->paralegal->area->city_name . ', ' . $paralegalCase->paralegal->area->province_name . ', ' . $paralegalCase->paralegal->area->region_name}}
                         </textarea>
@@ -126,9 +133,11 @@
                     </div>
                 </div>
             </div>
+            @if (auth()->user()->isAdmin() || auth()->user()->paralegal->id == $paralegalCase->paralegal_id)
             <button class="btn btn-block btn-primary" data-toggle="modal" data-target="#updateStatusModal">
                 <i class="fas fa-edit"></i> Update Status
             </button>
+            @endif
         </div>
     </div>
 </div>
