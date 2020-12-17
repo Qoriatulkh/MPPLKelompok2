@@ -105,10 +105,11 @@ class ParalegalCaseController extends Controller
      */
     public function show(ParalegalCase $paralegalCase)
     {
+        $statuses = ParalegalCaseStatus::all();
         if (!auth()->user()->isAdmin() && $paralegalCase->paralegal_id != auth()->user()->paralegal->id) {
             abort(403);
         }
-        return view('cases.show', compact('paralegalCase'));
+        return view('cases.show', compact('paralegalCase', 'statuses'));
     }
 
     /**
@@ -131,7 +132,11 @@ class ParalegalCaseController extends Controller
      */
     public function update(Request $request, ParalegalCase $paralegalCase)
     {
-        //
+        $paralegalCase->status_id = $request->status_id;
+        $paralegalCase->save();
+
+        Alert::success('Berhasil', "Berhasil memperbarui status kasus");
+        return redirect()->back();
     }
 
     /**
