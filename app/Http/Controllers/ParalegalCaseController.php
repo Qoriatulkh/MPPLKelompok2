@@ -10,6 +10,7 @@ use App\ParalegalCaseField;
 use App\ParalegalCaseStatus;
 use App\ParalegalCaseType;
 use Carbon\Carbon;
+use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -42,7 +43,15 @@ class ParalegalCaseController extends Controller
      */
     public function create()
     {
-        $paralegals = Paralegal::all();
+        if (auth()->user()->isAdmin()) {
+            $paralegals = Paralegal::where('isApproved', 1)->get();
+        } else {
+            $paralegals = [];
+            if (!Gate::check('add-cases')) {
+                Alert::error("Gagal", "Akun anda belum disetujui");
+                return redirect()->back();
+            }
+        }
         $types = ParalegalCaseType::all();
         $fields = ParalegalCaseField::all();
         $statuses = ParalegalCaseStatus::all();
@@ -65,7 +74,6 @@ class ParalegalCaseController extends Controller
         Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'date' => ['required', 'string'],
-            'paralegal_id' => ['required'],
             'type_id' => ['required'],
             'field_id' => ['required'],
             'description' => ['required'],

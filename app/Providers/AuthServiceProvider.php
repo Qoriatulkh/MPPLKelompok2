@@ -40,5 +40,13 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('update-profile', function ($user) {
             return !$user->isAdmin();
         });
+
+        Gate::define('add-cases', function ($user) {
+            if (!$user->isAdmin()) {
+                return $user->paralegal->isApproved;
+            }
+
+            return $user->isAdmin();
+        });
     }
 }

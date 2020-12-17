@@ -292,6 +292,7 @@ return [
                 [
                     'text' => 'Tambah Kasus',
                     'route' => 'case.create',
+                    'can' => 'add-cases'
                 ]
             ]
         ],
