@@ -84,6 +84,11 @@ class ProfileController extends Controller
             return redirect()->back();
         }
 
+        if ($image->getSize() > 1000000) {
+            Alert::error('Gagal', "Gambar tidak boleh lebih dari 1MB");
+            return redirect()->back();
+        }
+
         if ($user->paralegal->photo_url) {
             Storage::delete($user->paralegal->photo_url);
         }
