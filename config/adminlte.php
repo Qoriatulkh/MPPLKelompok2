@@ -289,6 +289,10 @@ return [
                     'route' => 'case.type.index',
                     'can' => 'manage-cases'
                 ],
+                [
+                    'text' => 'Tambah Kasus',
+                    'route' => 'case.create',
+                ]
             ]
         ],
         [

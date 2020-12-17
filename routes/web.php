@@ -51,10 +51,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/', 'ParalegalCaseController@index')->name('case.index');
         Route::get('/create', 'ParalegalCaseController@create')->name('case.create');
         Route::post('/store', 'ParalegalCaseController@store')->name('case.store');
-        Route::get('/{case}/show', 'ParalegalCaseController@show')->name('case.show');
-        Route::get('/{case}/edit', 'ParalegalCaseController@edit')->name('case.edit');
-        Route::post('/{case}/update', 'ParalegalCaseController@update')->name('case.update');
-        Route::delete('/{case}/delete', 'ParalegalCaseController@destroy')->name('case.destroy');
+        Route::get('/{paralegalCase}/show', 'ParalegalCaseController@show')->name('case.show');
+        Route::get('/{paralegalCase}/edit', 'ParalegalCaseController@edit')->name('case.edit');
+        Route::post('/{paralegalCase}/update', 'ParalegalCaseController@update')->name('case.update');
+        Route::delete('/{paralegalCase}/delete', 'ParalegalCaseController@destroy')->name('case.destroy');
 
         // Types
         Route::prefix('jenis')->group(function () {
