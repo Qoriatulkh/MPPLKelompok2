@@ -84,9 +84,9 @@
     {{-- Gender field --}}
     <div class="input-group mb-3">
         <select class="form-control {{ $errors->has('gender') ? 'is-invalid' : '' }}" id="sel1" name="gender">
-            <option disabled selected value="">Pilih jenis kelamin</option>
-            <option value="Male">Laki-laki</option>
-            <option value="Female">Perempuan</option>
+            <option disabled {{ old('gender') ?? 'selected' }}>Pilih jenis kelamin</option>
+            <option value="Male" {{ old('gender') == 'Male' ? 'selected' : ''}}>Laki-laki</option>
+            <option value="Female" {{ old('gender') == 'Female' ? 'selected' : ''}}>Perempuan</option>
         </select>
         <div class="input-group-append">
             <div class="input-group-text">
