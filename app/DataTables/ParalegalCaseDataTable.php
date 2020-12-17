@@ -26,7 +26,9 @@ class ParalegalCaseDataTable extends DataTable
             ->eloquent($query)
             ->filter(function ($filter) use ($request) {
                 if ($area_id = $request->query('area_id')) {
-                    $filter->where('area_id', $area_id);
+                    $filter->whereHas('paralegal', function ($query) use ($area_id) {
+                        $query->where('area_id', $area_id);
+                    });
                 }
                 if (($paralegal_id = $request->query('paralegal_id'))) {
                     $filter->where('paralegal_id', $paralegal_id);
