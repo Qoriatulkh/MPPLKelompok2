@@ -6,6 +6,7 @@ use Hash;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Storage;
+use Intervention\Image\Facades\Image;
 
 class ProfileController extends Controller
 {
@@ -95,5 +96,29 @@ class ProfileController extends Controller
 
         Alert::success("Berhasil", "Berhasil memperbarui foto profil");
         return redirect()->back();
+    }
+
+    public function downloadNameTag()
+    {
+        $user = auth()->user();
+        $img = Image::make(public_path('image/template-nametag.png'));
+        $profile = Image::make(public_path('storage/' . $user->paralegal->photo_url));
+        $profile->resize(336, 444);
+
+        $img->insert($profile, 'top-left', 175, 337);
+        $img->text($user->name, 338, 855, function ($font) {
+            $font->file(public_path('fonts/Bebas-Regular.ttf'));
+            $font->size(50);
+            $font->color('#FFFFFF');
+            $font->align('center');
+        });
+        $img->text($user->paralegal->number, 338, 935, function ($font) {
+            $font->file(public_path('fonts/Bebas-Regular.ttf'));
+            $font->size(40);
+            $font->color('#FFFFFF');
+            $font->align('center');
+        });
+
+        return $img->response('png');
     }
 }

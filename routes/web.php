@@ -28,6 +28,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::middleware('auth')->group(function () {
     Route::prefix('/profile')->group(function () {
         Route::get('/', 'ProfileController@profile')->name('profile');
+        Route::get('/nametag', 'ProfileController@downloadNameTag')->name('profile.nametag');
         Route::post('/update', 'ProfileController@updateProfile')->name('profile.update');
         Route::post('/changePassword', 'ProfileController@changePassword')->name('profile.changePassword');
         Route::get('/photo', 'ProfileController@photo')->name('profile.photo');

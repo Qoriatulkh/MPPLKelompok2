@@ -209,7 +209,7 @@
             @if (!auth()->user()->isAdmin())
             <div class="card-header text-right">
                 @if ($user->paralegal->isApproved)
-                <a class="btn btn-info" target="_blank" href="">
+                <a class="btn btn-info" target="_blank" href="{{route('profile.nametag')}}">
                     <i class="fas fa-download"></i> Unduh Name Tag
                 </a>
                 @endif
