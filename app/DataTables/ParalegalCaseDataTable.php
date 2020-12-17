@@ -166,7 +166,7 @@ class ParalegalCaseDataTable extends DataTable
             Column::make('date')
                 ->title('Tanggal'),
             Column::make('status')
-                ->title('Tanggal'),
+                ->title('Status'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
