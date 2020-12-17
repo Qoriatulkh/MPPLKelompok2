@@ -32,8 +32,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="description">Tanggal</label>
-                        <input class="form-control datepicker" data-provide="datepicker" type="text" name="date"
-                            value="{{ $nowDate }}">
+                        <input class="form-control datepicker {{ $errors->has('date') ? 'is-invalid' : '' }}"
+                            data-provide="datepicker" type="text" name="date" value="{{ $nowDate }}">
+                        @if($errors->has('date'))
+                        <div class="invalid-feedback">
+                            <strong>{{ $errors->first('date') }}</strong>
+                        </div>
+                        @endif
                     </div>
                 </div>
                 @if (auth()->user()->isAdmin())
@@ -125,8 +130,14 @@
                 <div class="col-12">
                     <div class="form-group">
                         <label for="description">Deskripsi</label>
-                        <textarea class="form-control date" id="description" rows="3" name="description"
+                        <textarea class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"
+                            id="description" rows="3" name="description"
                             placeholder="Masukkan deskripsi kasus"></textarea>
+                        @if($errors->has('description'))
+                        <div class="invalid-feedback">
+                            <strong>{{ $errors->first('description') }}</strong>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>

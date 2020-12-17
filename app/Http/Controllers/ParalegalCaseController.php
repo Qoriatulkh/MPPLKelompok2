@@ -66,12 +66,19 @@ class ParalegalCaseController extends Controller
         $data = $request->all();
         $user = auth()->user();
         $isAdmin = $user->isAdmin();
+        if ($isAdmin) {
+            $paralegalRequired = ['required'];
+        } else {
+            $paralegalRequired = [];
+        }
 
         Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'date' => ['required', 'string'],
+            'paralegal_id' => $paralegalRequired,
             'type_id' => ['required'],
             'field_id' => ['required'],
+            'status_id' => ['required'],
             'description' => ['required'],
         ])->validate();
 
